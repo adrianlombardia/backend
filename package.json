@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianlombardia/backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianlombardia/backend/issues"
+  },
+  "homepage": "https://github.com/adrianlombardia/backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "helmet": "^6.0.1",
+    "mongoose": "^6.8.2",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.5.4"
+  },
+  "description": ""
+}
