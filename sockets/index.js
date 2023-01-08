@@ -1,45 +1,17 @@
-const connectToXStore =require('express').Router();
-const { WebSocket } = require('ws');
-
-connectToXStore.get("/",(req,res) => {
-  res.send('FORM FOR LOGIN')
-})
-
-//conected
-connectToXStore.post("/login", async (req,res)=> {
-  try{
-    const config = {
-      url:  req.body.url,
-      accountNumber:req.body.accountNumber,
-      pw: req.body.accountNumber
-    }
-    const ws = new WebSocket(config.url);
+const express = require('express');
+function connectToXStore(req,res){
+  const router = express.Router();
+    
   
-    ws.on('open', () => {
-      send({
-        command: 'login',
-        arguments: {
-          userId: config.accountNumber,
-          password: config.pw,
-        },
-      });
+    router.get("/",(req,res) => {
+      res.send('FORM FOR LOGIN')
     });
-
-    const send = (message) => {
-      try {
-        const msg = JSON.stringify(message);
-        ws.send(msg);
-        res.json('Sent ' + msg.length + ' bytes of data: ' + msg);
-      } catch(Exception) {
-        res.json('Error while sending data: ' + Exception.message);
-      }
+    const config = {
+      url: req.body.url,
+      accountNumber: rep.body.accountNumber,
+      pw: re.body.pw,
     };
-
-   res.status(200).json(config);
-  }catch (err){
-    res.status(500).json(err) 
- }
-})
-
+    return  res.status(200).json(config);
+  }
 
 module.exports = connectToXStore;

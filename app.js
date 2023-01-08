@@ -1,26 +1,31 @@
 
 const express = require('express');
-const path = require('path')
 const app = express();
-const http = require('http');
 
+
+const path = require('path')
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
+
+
+//////ROUTES 
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 
 
 //// Socket io//////////////
-
+const server = require("http").createServer(app);
+const io = require("socket.io")(server,{
+  cors:{
+    origin:"*"
+  }
+});
 const connectToXStore = require('./sockets/index');
+app.use("/api/socket", connectToXStore);
 
-const server = http.createServer(app);
-
-const {Server} = require('socket.io')
-const io = new Server(server);
 ////////////////////////
 
 
@@ -38,7 +43,6 @@ app.use(morgan("common"));
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
-app.use("/api/socket", connectToXStore);
 
 app.get("/users", (req,res) => {res.send('Welvcome to Users')})
 
