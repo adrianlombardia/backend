@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path')
 const app = express();
+const http = require('http');
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -12,10 +13,16 @@ const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 
 
-//// Socket io
+//// Socket io//////////////
+
 const connectToXStore = require('./sockets/index');
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+
+const server = http.createServer(app);
+
+const {Server} = require('socket.io')
+const io = new Server(server);
+////////////////////////
+
 
 
 dotenv.config();
